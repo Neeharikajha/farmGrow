@@ -26,7 +26,7 @@ export default function Sidebar() {
   const location = useLocation(); // detect current route
 
   return (
-    <aside className="bg-white border-r w-72 flex flex-col h-screen">
+    <aside className="fixed top-0 left-0 bg-white border-r w-72 flex flex-col h-screen">
       {/* Top Company/Brand */}
       <div className="flex items-center gap-3 px-6 py-4 border-b">
         <div className="bg-black text-white rounded-full h-10 w-10 flex items-center justify-center font-bold text-xl">

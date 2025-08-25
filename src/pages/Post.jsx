@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Sidebar1 from "../farmerUi/own-sidebar"; // adjust path
 
@@ -89,7 +90,7 @@ export default function Dashboard() {
   return (
     <div className="flex">
       <Sidebar1 />
-      <main className="flex-1 p-6 relative">
+      <main className="ml-72 flex-1 p-6 relative">
         <h1 className="text-2xl font-bold mb-6">My Products</h1>
 
         {/* Grid: Add card + items (Add card always present & big) */}
@@ -308,3 +309,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
