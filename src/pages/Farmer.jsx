@@ -1,4 +1,4 @@
-import Sidebar1 from "../farmerUi/own-sidebar"; // adjust the path
+import Sidebar1 from "../farmerUi/own-sidebar"; 
 
 function Farmer() {
   return (
