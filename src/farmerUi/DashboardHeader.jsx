@@ -1,8 +1,7 @@
-// DashboardHeader.jsx
 import { FiBell, FiSearch } from "react-icons/fi";
 export default function DashboardHeader({ user }) {
   return (
-    <div className="flex items-center justify-between mb-6 px-4">
+    <div className="flex items-center justify-between mb-6 px-4 w-full">
       <div className="flex items-center gap-2">
         <FiSearch className="ml-1 text-gray-400" />
         <input

@@ -1,19 +1,3 @@
-// import Sidebar1 from "../farmerUi/own-sidebar";
-
-// export default function Dashboard() {
-//   return (
-//     <div>
-//       {/* Sidebar stays fixed or absolute */}
-//       <div className="fixed top-0 left-0 h-full w-64">
-//         <Sidebar1 />
-//       </div>
-
-//       {/* Main content */}
-
-//     </div>
-//   );
-// }
-
 import Sidebar1 from "../farmerUi/own-sidebar";
 import BannerCarousel from "../farmerUi/BannerCarousel";
 import DashboardHeader from "../farmerUi/DashboardHeader";
@@ -23,7 +7,7 @@ import ListingToggle from "../farmerUi/ListingToggle";
 import { useNavigate } from "react-router-dom";
 
 const user = { name: "Albert" };
-const weather = { city: "Chicago", temp: 24, high: 27, low: 10, desc: "Cloudy" };
+const weather = { city: "India", temp: 24, high: 27, low: 10, desc: "Night" };
 const revenue = 50000, growth = 12.45;
 
 const trending = [
@@ -46,30 +30,28 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Fixed sidebar sits on top of the document flow */}
+    <div className="min-h-screen bg-gray-50 w-full">
       <Sidebar1 />
 
-      {/* Main area reserves space for sidebar on lg+ */}
       <main className="pl-0 lg:pl-72 w-full">
         <div className="px-4 md:px-8 py-6 w-full">
           <DashboardHeader user={user} />
-          {/* Make sure the banner stretches full width */}
+
+          {/* Banner full-width */}
           <div className="w-full">
-            <BannerCarousel />
+            <BannerCarousel className="w-full" />
           </div>
 
-          {/* Two-column responsive grid that uses the whole row */}
+          {/* Two full-width columns */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start w-full">
-            {/* Left column */}
             <section className="w-full">
-              <WeatherCard city={weather.city} forecast={weather} />
-              <RevenueCard revenue={`$${revenue.toLocaleString()}`} growth={growth} />
+              <WeatherCard className="w-full" city={weather.city} forecast={weather} />
+              <RevenueCard className="w-full" revenue={`$${revenue.toLocaleString()}`} growth={growth} />
             </section>
 
-            {/* Right column */}
             <aside className="w-full">
               <ListingToggle
+                className="w-full"
                 trending={trending}
                 listed={listed}
                 onAddEditClick={() => navigate("/post")}
@@ -81,3 +63,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
