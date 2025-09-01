@@ -1,5 +1,8 @@
+
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { SidebarProvider } from "./components/ui/sidebar"; 
+
+// Farmer pages
 import Farmer from "./pages/Farmer";
 import User from "./pages/User";
 import Hero from "./webpage/Hero";
@@ -11,6 +14,12 @@ import Transaction from "./pages/Transaction";
 import Analytics from "./pages/Analytics";
 import CropCalendar from "./pages/CropCalendar";
 
+// User pages
+import UserShop from "./pages/UserShop";       // Buy page
+import Trending from "./pages/Trending";       // Trending page
+import SnapFind from "./pages/SnapFind";       // Upload & find page
+import CartPage from "./pages/CartPage";       // Cart page
+
 function App() {
   return (
     <SidebarProvider>
@@ -19,12 +28,16 @@ function App() {
           {/* Landing page */}
           <Route path="/" element={<Hero />} />
           
-          {/* Farmer & User */}
+          {/* Farmer & default User page */}
           <Route path="/farmer" element={<Farmer />} />
           <Route path="/user" element={<User />} />
 
-          {/* Redirect for unknown routes */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          {/* User routes */}
+          <Route path="/user/home" element={<Hero />} />
+          <Route path="/user/buy" element={<UserShop />} />
+          <Route path="/user/trending" element={<Trending />} />
+          <Route path="/user/snapfind" element={<SnapFind />} />
+          <Route path="/user/cart" element={<CartPage />} />
 
           {/* Dashboard routes */}
           <Route path="/dashboard" element={<Dashboard />} />
@@ -33,6 +46,9 @@ function App() {
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/crop-calendar" element={<CropCalendar />} />
+
+          {/* Redirect unknown routes */}
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
     </SidebarProvider>
