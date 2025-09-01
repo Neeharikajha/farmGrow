@@ -15,7 +15,7 @@ import Analytics from "./pages/Analytics";
 import CropCalendar from "./pages/CropCalendar";
 
 // User pages
-import UserShop from "./pages/UserShop";       // Buy page
+import UserShop from "./pages/BuyPage";       // Buy page
 import Trending from "./pages/Trending";       // Trending page
 import SnapFind from "./pages/SnapFind";       // Upload & find page
 import CartPage from "./pages/CartPage";       // Cart page

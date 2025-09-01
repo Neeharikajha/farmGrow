@@ -1,14 +1,23 @@
 // import React, { useState } from "react";
-// import { Search, Heart, User, ShoppingCart, Menu, X, Upload } from "lucide-react";
+// import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
+// import { Link, useNavigate } from "react-router-dom";
 
 // const Navbar = ({ cartCount = 0, toggleCart }) => {
 //   const [open, setOpen] = useState(false);
+//   const navigate = useNavigate();
 
-//   const links = ["Home", "Buy", "Trending", "SnapFind"]; // new one-word for upload & find
+//   const links = [
+//     { name: "Home", path: "/user" },
+//     { name: "Buy", path: "/user/buy" },
+//     { name: "Trending", path: "/user/trending" },
+//     { name: "SnapFind", path: "/user/snapfind" },
+//   ];
+
 //   const linkClass =
 //     "hover:text-green-600 cursor-pointer text-[16px] font-medium transition-colors duration-200";
 
-//   const iconClass = "text-gray-700 hover:text-green-600 transition-colors duration-200";
+//   const iconClass =
+//     "text-gray-700 hover:text-green-600 transition-colors duration-200";
 
 //   return (
 //     <header className="border-b bg-white shadow-sm">
@@ -19,14 +28,16 @@
 //             <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-green-600">
 //               <span className="text-white text-[18px] font-bold">🌿</span>
 //             </span>
-//             <span className="text-[18px] font-semibold text-gray-900">FarmGrow</span>
+//             <span className="text-[18px] font-semibold text-gray-900">
+//               FarmGrow
+//             </span>
 //           </div>
 
 //           {/* Desktop Links */}
 //           <ul className="hidden md:flex items-center gap-8 text-gray-700">
 //             {links.map((link) => (
-//               <li key={link} className={linkClass}>
-//                 {link}
+//               <li key={link.name} className={linkClass}>
+//                 <Link to={link.path}>{link.name}</Link>
 //               </li>
 //             ))}
 //           </ul>
@@ -35,11 +46,7 @@
 //           <div className="hidden md:flex items-center gap-4">
 //             <Search className={iconClass} size={20} />
 //             <User className={iconClass} size={20} />
-//             <button
-//               aria-label="Cart"
-//               className="relative"
-//               onClick={toggleCart}
-//             >
+//             <button aria-label="Cart" className="relative" onClick={toggleCart}>
 //               <ShoppingCart className={iconClass} size={20} />
 //               {cartCount > 0 && (
 //                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">
@@ -64,8 +71,10 @@
 //           <div className="md:hidden pb-4 mt-2 border-t border-gray-200">
 //             <ul className="flex flex-col gap-3 text-gray-700">
 //               {links.map((link) => (
-//                 <li key={link} className={linkClass}>
-//                   {link}
+//                 <li key={link.name} className={linkClass}>
+//                   <Link to={link.path} onClick={() => setOpen(false)}>
+//                     {link.name}
+//                   </Link>
 //                 </li>
 //               ))}
 //             </ul>
@@ -98,7 +107,7 @@ import React, { useState } from "react";
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ cartCount = 0, toggleCart }) => {
+const Navbar = ({ cartCount = 0 }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -142,7 +151,11 @@ const Navbar = ({ cartCount = 0, toggleCart }) => {
           <div className="hidden md:flex items-center gap-4">
             <Search className={iconClass} size={20} />
             <User className={iconClass} size={20} />
-            <button aria-label="Cart" className="relative" onClick={toggleCart}>
+            <button
+              aria-label="Cart"
+              className="relative"
+              onClick={() => navigate("/user/cart")}
+            >
               <ShoppingCart className={iconClass} size={20} />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">
@@ -180,7 +193,7 @@ const Navbar = ({ cartCount = 0, toggleCart }) => {
               <button
                 aria-label="Cart"
                 className="relative"
-                onClick={toggleCart}
+                onClick={() => navigate("/user/cart")}
               >
                 <ShoppingCart className={iconClass} size={20} />
                 {cartCount > 0 && (
