@@ -1,44 +1,35 @@
-import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+import ChatSidebar from "../components/chat_sidebar.jsx";
+import ChatWindow from "../components/msg_ui.jsx";
+import { useState } from "react";
 
-const socket = io("http://localhost:5000");
-   // backend URL
 
-export default function Home() {
-  const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([]);
+export default function Chat() {
+  const [activeChat, setActiveChat] = useState(null);
 
-  useEffect(() => {
-    socket.on("receiveMessage", (msg) => {
-      setChat((prev) => [...prev, msg]);
-    });
-
-    return () => socket.off("receiveMessage");
-  }, []);
-
-  const sendMessage = () => {
-    socket.emit("sendMessage", {
-      senderId: "farmer1",
-      receiverId: "consumer1",
-      text: message,
-    });
-    setMessage("");
-  };
+  const chats = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+    { id: 3, name: "Charlie" },
+  ];
 
   return (
-    <div>
-      <h1>🌾 FarmGrow Chat</h1>
-      <div>
-        {chat.map((msg, i) => (
-          <p key={i}><b>{msg.senderId}</b>: {msg.text}</p>
-        ))}
-      </div>
-      <input
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type message..."
+    <div className="flex h-screen w-screen">
+      
+      <ChatSidebar
+        chats={chats}
+        activeChat={activeChat}
+        setActiveChat={setActiveChat}
       />
-      <button onClick={sendMessage}>Send</button>
+
+      <div className="flex-1">
+        {activeChat ? (
+          <ChatWindow chat={activeChat} />
+        ) : (
+          <div className="flex items-center justify-center h-full text-gray-500">
+            Select a chat to start messaging
+          </div>
+        )}
+      </div>
     </div>
   );
 }
