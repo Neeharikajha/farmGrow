@@ -6,7 +6,7 @@ function SingleCardTransaction({ title, value, subtitle, highlight, highlightCol
       <div className="text-gray-500 text-sm font-semibold uppercase tracking-wide">
         {title}
       </div>
-      <div className="mt-2">
+      <div className="mt-1">
         <div className="text-gray-900 text-2xl font-bold">{value}</div>
         {subtitle && <div className="text-gray-400 text-xs mt-1">{subtitle}</div>}
       </div>
