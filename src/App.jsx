@@ -2,6 +2,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { SidebarProvider } from "./components/ui/sidebar"; 
 
+import SignUp from "./pages/Signup";
+
 // Farmer pages
 import Farmer from "./pages/Farmer";
 import User from "./pages/User";
@@ -27,6 +29,7 @@ function App() {
         <Routes>
           {/* Landing page */}
           <Route path="/" element={<Hero />} />
+           <Route path="/SignUp" element={<SignUp />} />
           
           {/* Farmer & default User page */}
           <Route path="/farmer" element={<Farmer />} />
