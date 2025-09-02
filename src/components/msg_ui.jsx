@@ -1,6 +1,7 @@
 import { useState } from "react";
+import NegotiationOptions from "./Negotiation.jsx";
 
-export default function ChatWindow({ chat }) {
+export default function ChatWindow({ chat,socket }) {
   const [messages, setMessages] = useState([
     { sender: "them", text: "Hey there!" },
     { sender: "me", text: "Hello 👋" },
@@ -55,6 +56,15 @@ export default function ChatWindow({ chat }) {
         >
           Send
         </button>
+
+        <NegotiationOptions 
+          price={2200} 
+          onSelect={(offer) => {
+            // send as chat message or negotiation event
+            socket.emit("sendOffer", { offer });
+          }} 
+        />
+
       </div>
     </div>
   );
