@@ -7,6 +7,9 @@ import cors from "cors";
 import { socketHandler } from "./controllers/socket.js";
 import authRoutes from './routes/auth.js'; 
 
+import farmersPostRoutes from "./routes/farmersPostRoutes.js";
+
+
 dotenv.config();
 const app= express();
 app.use(cors());
@@ -31,6 +34,9 @@ const io= new Server(server, {
 
 app.use('/auth', authRoutes);
 socketHandler(io);
+
+app.use("/posts", farmersPostRoutes); // all CRUD for posts
+
 
 // io.on("connection", (socket) => {
 //   console.log(" User connected:", socket.id);
