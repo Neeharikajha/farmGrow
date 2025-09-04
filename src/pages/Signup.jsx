@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const navigate= useNavigate();
   const [isLogin, setIsLogin] = useState(false);
+  const [role,setRole] = useState("customer");
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -22,6 +23,7 @@ const SignUp = () => {
         const res = await axios.post('http://localhost:5000/auth/login', {
           phone,
           password,
+          
         });
           if (res.data && res.data.token) {
           localStorage.setItem("token", res.data.token);
@@ -37,6 +39,7 @@ const SignUp = () => {
         const res = await axios.post('http://localhost:5000/auth/signup', {
           phone,
           password,
+          role
         });
         alert("Signup successful!");
         console.log(res.data);
@@ -90,6 +93,36 @@ const SignUp = () => {
 
           {!isLogin && (
             <>
+              <div>
+                <label className="block mb-2 text-sm font-medium">
+                  Choose your role
+                </label>
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="role"
+                      value="farmer"
+                      checked={role === "farmer"}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-4 h-4"
+                    />
+                    <span>Farmer 🌾</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="role"
+                      value="customer"
+                      checked={role === "customer"}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-4 h-4"
+                    />
+                    <span>Customer 🛒</span>
+                  </label>
+                </div>
+              </div>
               <div>
                 <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium">
                   Confirm Password

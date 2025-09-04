@@ -19,12 +19,16 @@ export const signup =async(req,res) =>{
     if(error){
         res.status(400).json({message:error.details[0].message});
     }
-    const {phone,password} = req.body;
+    const {phone,password,role} = req.body;
     try{
+       if (!["farmer", "customer"].includes(role)) {
+      return res.status(400).json({ message: "Role must be farmer or customer" });
+    }
         const hashedPassword= await bcrypt.hash(password, 10);
         const newSign = new Auth({
             phone,
-            password: hashedPassword
+            password: hashedPassword, 
+            role
         });
         const SavedUser= await newSign.save();
         res.status(200).json({message: "User registered successfully", user:SavedUser});

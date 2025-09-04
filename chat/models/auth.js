@@ -11,6 +11,11 @@ const authSchema= new mongoose.Schema({
         type:String,
         required:true,
         minlength:5
+    },
+    role:{
+        type:String,
+        enum :["farmer", "customer"],
+        required: true
     }
 });
 
