@@ -15,6 +15,7 @@ const SignUp = () => {
       if (!isLogin && password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
+
     }
 
      try {
@@ -27,8 +28,14 @@ const SignUp = () => {
         });
           if (res.data && res.data.token) {
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("role",res.data.user.role)
           alert("Login successful!");
-          navigate("/farmer"); 
+          if(res.data.user.role === "farmer"){
+            navigate("/farmer"); 
+          }else if(res.data.user.role === "customer"){
+            navigate("/user");
+          }
+          
           }else{
             alert(res.data.message || "Login failed.");
           }

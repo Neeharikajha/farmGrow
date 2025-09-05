@@ -7,7 +7,8 @@ import jwt from "jsonwebtoken";
 
 const signupSchema = Joi.object({
     phone :Joi.string().required().min(10),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    role: Joi.string().valid("farmer","customer").required()
 }); 
 const loginSchema =Joi.object({
     phone :Joi.string().required().min(10),
@@ -56,7 +57,7 @@ export const login= async(req,res)=>{
         res.status(200).json({
             message: "Login successful",
             token,
-            user:{id:user._id, phone: user.phone}
+            user:{id:user._id, phone: user.phone, role:user.role}
         });
 
     }catch(err){
