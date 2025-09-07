@@ -3,6 +3,7 @@ import FarmersPost from "../models/farmersPost.js";
 // Create a new post
 export const createPost = async (req, res) => {
   try {
+      console.log("Incoming data:", req.body, "User:", req.user);
     const { imageUrl, name, totalQuantity, price, offeredQuantity, available } = req.body;
 
     const newPost = new FarmersPost({
@@ -18,6 +19,7 @@ export const createPost = async (req, res) => {
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);
   } catch (err) {
+     console.error("Error in createPost:", err);
     res.status(500).json({ message: "Failed to create post", error: err.message });
   }
 };

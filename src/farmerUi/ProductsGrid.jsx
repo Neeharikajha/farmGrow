@@ -19,7 +19,7 @@ export default function ProductsGrid({ items, onAdd, onEdit, onDelete }) {
       {/* Existing products */}
       {items.map((item) => (
         <ProductCard
-          key={item.id}
+          key={item._id}
           item={item}
           onEdit={onEdit}
           onDelete={onDelete}

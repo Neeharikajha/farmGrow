@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { socketHandler } from "./controllers/socket.js";
 import authRoutes from './routes/auth.js'; 
-
+import bodyParser from "body-parser";
 import farmersPostRoutes from "./routes/farmersPostRoutes.js";
 
 
@@ -14,6 +14,9 @@ dotenv.config();
 const app= express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB working"))
@@ -35,7 +38,7 @@ const io= new Server(server, {
 app.use('/auth', authRoutes);
 socketHandler(io);
 
-app.use("/posts", farmersPostRoutes); // all CRUD for posts
+app.use("/post", farmersPostRoutes); // all CRUD for posts
 
 
 // io.on("connection", (socket) => {

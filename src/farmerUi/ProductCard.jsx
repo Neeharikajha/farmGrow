@@ -30,7 +30,7 @@ export default function ProductCard({ item, onEdit, onDelete }) {
             <Pencil className="w-4 h-4 text-emerald-600" />
           </button>
           <button
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item._id)}
             className="bg-white/90 p-1 rounded-full shadow hover:bg-red-100"
           >
             <Trash2 className="w-4 h-4 text-red-600" />
