@@ -32,7 +32,7 @@ function App() {
            <Route path="/SignUp" element={<SignUp />} />
           
           {/* Farmer & default User page */}
-          <Route path="/farmer" element={<Farmer />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user" element={<User />} />
 
           {/* User routes */}

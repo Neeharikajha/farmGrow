@@ -31,7 +31,7 @@ const SignUp = () => {
           localStorage.setItem("role",res.data.user.role)
           alert("Login successful!");
           if(res.data.user.role === "farmer"){
-            navigate("/farmer"); 
+            navigate("/dashboard"); 
           }else if(res.data.user.role === "customer"){
             navigate("/user");
           }
