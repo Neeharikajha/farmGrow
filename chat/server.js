@@ -1,61 +1,33 @@
 import express from "express";
-import { Server } from "socket.io";
-import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { socketHandler } from "./controllers/socket.js";
-import authRoutes from './routes/auth.js'; 
 import bodyParser from "body-parser";
+import authRoutes from './routes/auth.js'; 
 import farmersPostRoutes from "./routes/farmersPostRoutes.js";
 
-
 dotenv.config();
-const app= express();
+
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-.then(()=> console.log("MongoDB working"))
-.catch(err=> console.error("Not working", err));
+  .then(() => console.log("MongoDB working"))
+  .catch(err => console.error("MongoDB connection failed:", err));
 
+// Basic test route
+app.get("/", (req, res) => res.send("Chat working"));
 
-app.get("/", (req,res) => res.send("Chat working"));
-
-
-const server= http.createServer(app);
-
-const io= new Server(server, {
-    cors:{
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
+// Auth routes
 app.use('/auth', authRoutes);
-socketHandler(io);
 
-app.use("/post", farmersPostRoutes); // all CRUD for posts
-
-
-// io.on("connection", (socket) => {
-//   console.log(" User connected:", socket.id);
-
-//   socket.on("sendMessage", async ({ senderId, receiverId, text }) => {
-//     const newMessage = new msg({ senderId, receiverId, text });
-//     await newMessage.save();
-
-//        io.emit("receiveMessage", newMessage);
-//   });
-//   socket.on("disconnect", () => {
-//     console.log(" User disconnected:", socket.id);
-//   });
-// });
-
-
+// Farmers posts routes (CRUD)
+app.use("/post", farmersPostRoutes);
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, ()=> console.log(`Server on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
