@@ -8,12 +8,16 @@ import { socketHandler } from "./controllers/socket.js";
 import authRoutes from './routes/auth.js'; 
 import bodyParser from "body-parser";
 import farmersPostRoutes from "./routes/farmersPostRoutes.js";
-
+import msgRoutes from "./routes/msgRoutes.js";
 
 dotenv.config();
 const app= express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({
+  origin: "http://localhost:5173", // Vite frontend URL
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -30,8 +34,9 @@ const server= http.createServer(app);
 
 const io= new Server(server, {
     cors:{
-        origin: "*",
-        methods: ["GET", "POST"]
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
@@ -39,7 +44,7 @@ app.use('/auth', authRoutes);
 socketHandler(io);
 
 app.use("/post", farmersPostRoutes); // all CRUD for posts
-
+app.use("/messages", msgRoutes);
 
 // io.on("connection", (socket) => {
 //   console.log(" User connected:", socket.id);
