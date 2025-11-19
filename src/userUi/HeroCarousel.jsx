@@ -14,9 +14,9 @@ export default function HeroCarousel({ className = "" }) {
         slidesPerView={1}
       >
         {[
-          { title: "Fresh from Farm", subtitle: "Up to 20% OFF on leafy greens", img: "/banners/greens.jpg" },
-          { title: "Organic Picks", subtitle: "Certified organic vegetables", img: "/banners/organic.jpg" },
-          { title: "Bulk Orders", subtitle: "Best mandi rates for kg/quintal", img: "/banners/bulk.jpg" },
+          { title: "Fresh from Farm", subtitle: "Up to 20% OFF on leafy greens", img: "https://media.tehrantimes.com/d/t/2021/06/20/4/3808608.jpg" },
+          { title: "Organic Picks", subtitle: "Certified organic vegetables", img: "https://www.timeoutsharjah.com/cloud/timeoutsharjah/2021/09/09/EpOxSCN3-Online-bulk-buying-now-available-at-NRTC-UAE-1200x800.jpg" },
+          { title: "Bulk Orders", subtitle: "Best mandi rates for kg/quintal", img: "https://i0.wp.com/fruitandvegdirect.com/wp-content/uploads/2024/05/wholesale.webp?fit=800%2C800&ssl=1" },
         ].map((b, idx) => (
           <SwiperSlide key={idx}>
             <div className="relative h-48 md:h-64">
